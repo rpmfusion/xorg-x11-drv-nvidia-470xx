@@ -236,6 +236,7 @@ cp -a \
     libnvidia-nvvm.so.4.0.0 \
     libnvidia-rtcore.so.%{version} \
     libnvoptix.so.%{version} \
+    libnvidia-vulkan-producer.so.%{version} \
 %endif
     libnvidia-eglcore.so.%{version} \
     libnvidia-encode.so.%{version} \
@@ -281,6 +282,7 @@ ln -sf libnvidia-nvvm.so.4 %{buildroot}%{_libdir}/libnvidia-nvvm.so
 install    -m 0755         -d %{buildroot}%{_datadir}/vulkan/{icd.d,implicit_layer.d}/
 install -p -m 0644 nvidia_icd.json %{buildroot}%{_datadir}/vulkan/icd.d/
 install -p -m 0644 nvidia_layers.json %{buildroot}%{_datadir}/vulkan/implicit_layer.d/
+ln -sf libnvidia-vulkan-producer.so.%{version} %{buildroot}%{_libdir}/libnvidia-vulkan-producer.so
 
 # X DDX driver and GLX extension
 install -p -D -m 0755 libglxserver_nvidia.so.%{version} %{buildroot}%{_libdir}/xorg/modules/extensions/libglxserver_nvidia.so
@@ -468,6 +470,8 @@ fi ||:
 %{_libdir}/libnvidia-rtcore.so.%{version}
 %{_libdir}/libnvoptix.so.1
 %{_libdir}/libnvoptix.so.%{version}
+%{_libdir}/libnvidia-vulkan-producer.so.%{version}
+%{_libdir}/libnvidia-vulkan-producer.so
 %{_winedir}/
 %endif
 %{_libdir}/libnvidia-eglcore.so.%{version}
