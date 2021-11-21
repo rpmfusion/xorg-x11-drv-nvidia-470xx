@@ -80,7 +80,7 @@ Conflicts:       xorg-x11-drv-nvidia-390xx
 Conflicts:       xorg-x11-drv-nvidia
 
 %global         __provides_exclude ^(lib.*GL.*\\.so.*)$
-%global         __requires_exclude ^libglxserver_nvidia.so|^(lib.*GL.*\\.so.*)$
+%global         __requires_exclude ^libnvidia-vulkan-producer.so|^libglxserver_nvidia.so|^(lib.*GL.*\\.so.*)$
 
 
 %description
