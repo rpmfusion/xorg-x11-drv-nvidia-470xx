@@ -24,7 +24,7 @@
 
 Name:            xorg-x11-drv-%{_nvidia_serie}
 Epoch:           3
-Version:         470.94
+Version:         470.103.01
 Release:         1%{?dist}
 Summary:         NVIDIA's 470xx series proprietary display driver for NVIDIA graphic cards
 
@@ -97,10 +97,10 @@ for hardware accelerated rendering with the following NVIDIA chipsets:
 - GeForce 3000(M) series
 
 For the full product support list, please consult the release notes
-http://download.nvidia.com/XFree86/Linux-x86/%{version}/README/index.html
+https://download.nvidia.com/XFree86/Linux-x86/%{version}/README/index.html
 
 Please use the following documentation:
-http://rpmfusion.org/Howto/NVIDIA
+https://rpmfusion.org/Howto/NVIDIA
 
 
 %package devel
@@ -555,6 +555,9 @@ fi ||:
 %endif
 
 %changelog
+* Tue Feb 01 2022 Vitaly Zaitsev <vitaly@easycoding.org> - 3:470.103.01-1
+- Updated to version 470.103.01.
+
 * Mon Dec 13 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 3:470.94-1
 - Updated to version 470.94.
 
