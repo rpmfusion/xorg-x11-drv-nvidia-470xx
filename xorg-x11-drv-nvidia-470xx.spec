@@ -25,7 +25,7 @@
 Name:            xorg-x11-drv-%{_nvidia_serie}
 Epoch:           3
 Version:         470.103.01
-Release:         3%{?dist}
+Release:         4%{?dist}
 Summary:         NVIDIA's 470xx series proprietary display driver for NVIDIA graphic cards
 
 License:         Redistributable, no modification permitted
@@ -555,6 +555,9 @@ fi ||:
 %endif
 
 %changelog
+* Tue Apr 05 2022 Leigh Scott <leigh123linux@gmail.com> - 3:470.103.01-4
+- Fix appdata
+
 * Sat Feb 12 2022 Sérgio Basto <sergio@serjux.com> - 3:470.103.01-3
 - Rebuild with target f36-nonfree-multilibs
 
