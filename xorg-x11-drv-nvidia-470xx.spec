@@ -401,7 +401,7 @@ fi
 if [ "$1" -eq "1" ]; then
   %{_grubby} --remove-args='nomodeset' --args='%{_dracutopts}' &>/dev/null
   sed -i -e 's/GRUB_CMDLINE_LINUX="/GRUB_CMDLINE_LINUX="%{_dracutopts} /g' %{_sysconfdir}/default/grub
-  if [ -f %{_sysconfdir}/gdm/custom.conf ] ; then
+  if [ -f %{_sysconfdir}/gdm/custom.conf ]; then
     sed -i -e 's/#WaylandEnable=.*/WaylandEnable=false/' %{_sysconfdir}/gdm/custom.conf
   fi
 fi || :
@@ -410,7 +410,7 @@ fi || :
 if [ "$1" -eq "0" ]; then
   %{_grubby} --remove-args='%{_dracutopts}' &>/dev/null
   sed -i -e 's/%{_dracutopts} //g' %{_sysconfdir}/default/grub
-  if [ -f %{_sysconfdir}/gdm/custom.conf ] ; then
+  if [ -f %{_sysconfdir}/gdm/custom.conf ]; then
     sed -i -e 's/WaylandEnable=.*/#WaylandEnable=false/' %{_sysconfdir}/gdm/custom.conf
   fi
   # Backup and disable previously used xorg.conf
