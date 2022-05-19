@@ -25,7 +25,7 @@
 Name:            xorg-x11-drv-%{_nvidia_serie}
 Epoch:           3
 Version:         470.129.06
-Release:         1%{?dist}
+Release:         2%{?dist}
 Summary:         NVIDIA's 470xx series proprietary display driver for NVIDIA graphic cards
 
 License:         Redistributable, no modification permitted
@@ -400,13 +400,19 @@ fi
 %post
 if [ "$1" -eq "1" ]; then
   %{_grubby} --remove-args='nomodeset' --args='%{_dracutopts}' &>/dev/null
-  sed -i -e 's/GRUB_CMDLINE_LINUX="/GRUB_CMDLINE_LINUX="%{_dracutopts} /g' /etc/default/grub
+  sed -i -e 's/GRUB_CMDLINE_LINUX="/GRUB_CMDLINE_LINUX="%{_dracutopts} /g' %{_sysconfdir}/default/grub
+  if [ -f %{_sysconfdir}/gdm/custom.conf ] ; then
+    sed -i -e 's/#WaylandEnable=.*/WaylandEnable=false/' %{_sysconfdir}/gdm/custom.conf
+  fi
 fi || :
 
 %preun
 if [ "$1" -eq "0" ]; then
   %{_grubby} --remove-args='%{_dracutopts}' &>/dev/null
-  sed -i -e 's/%{_dracutopts} //g' /etc/default/grub
+  sed -i -e 's/%{_dracutopts} //g' %{_sysconfdir}/default/grub
+  if [ -f %{_sysconfdir}/gdm/custom.conf ] ; then
+    sed -i -e 's/WaylandEnable=.*/#WaylandEnable=false/' %{_sysconfdir}/gdm/custom.conf
+  fi
   # Backup and disable previously used xorg.conf
   [ -f %{_sysconfdir}/X11/xorg.conf ] && mv %{_sysconfdir}/X11/xorg.conf %{_sysconfdir}/X11/xorg.conf.nvidia_uninstalled &>/dev/null
 fi ||:
@@ -555,6 +561,9 @@ fi ||:
 %endif
 
 %changelog
+* Thu May 19 2022 Vitaly Zaitsev <vitaly@easycoding.org> - 3:470.129.06-2
+- Explicitly disabled Wayland support in GDM.
+
 * Mon May 16 2022 Vitaly Zaitsev <vitaly@easycoding.org> - 3:470.129.06-1
 - Updated to version 470.129.06.
 
