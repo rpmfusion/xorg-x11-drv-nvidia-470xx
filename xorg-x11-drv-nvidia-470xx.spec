@@ -24,8 +24,8 @@
 
 Name:            xorg-x11-drv-%{_nvidia_serie}
 Epoch:           3
-Version:         470.129.06
-Release:         2%{?dist}
+Version:         470.141.03
+Release:         1%{?dist}
 Summary:         NVIDIA's 470xx series proprietary display driver for NVIDIA graphic cards
 
 License:         Redistributable, no modification permitted
@@ -561,6 +561,9 @@ fi ||:
 %endif
 
 %changelog
+* Tue Aug 02 2022 Vitaly Zaitsev <vitaly@easycoding.org> - 3:470.141.03-1
+- Updated to version 470.141.03.
+
 * Thu May 19 2022 Vitaly Zaitsev <vitaly@easycoding.org> - 3:470.129.06-2
 - Explicitly disabled Wayland support in GDM.
 
