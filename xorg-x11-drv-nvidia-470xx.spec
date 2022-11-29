@@ -24,8 +24,8 @@
 
 Name:            xorg-x11-drv-%{_nvidia_serie}
 Epoch:           3
-Version:         470.141.03
-Release:         2%{?dist}
+Version:         470.161.03
+Release:         1%{?dist}
 Summary:         NVIDIA's 470xx series proprietary display driver for NVIDIA graphic cards
 
 License:         Redistributable, no modification permitted
@@ -561,6 +561,9 @@ fi ||:
 %endif
 
 %changelog
+* Tue Nov 29 2022 Vitaly Zaitsev <vitaly@easycoding.org> - 3:470.161.03-1
+- Updated to version 470.161.03.
+
 * Mon Aug 08 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:470.141.03-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
   5.1
