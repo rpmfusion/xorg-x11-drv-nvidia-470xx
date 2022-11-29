@@ -479,6 +479,8 @@ fi ||:
 %{_libdir}/libnvoptix.so.%{version}
 %{_libdir}/libnvidia-vulkan-producer.so.%{version}
 %{_libdir}/libnvidia-vulkan-producer.so
+# Fix f38 screw up
+%exclude %{_libdir}/libnvidia-vulkan-producer.so.470
 %{_winedir}/
 %endif
 %{_libdir}/libnvidia-eglcore.so.%{version}
