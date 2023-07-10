@@ -24,7 +24,7 @@
 
 Name:            xorg-x11-drv-%{_nvidia_serie}
 Epoch:           3
-Version:         470.182.03
+Version:         470.199.02
 Release:         1%{?dist}
 Summary:         NVIDIA's 470xx series proprietary display driver for NVIDIA graphic cards
 
@@ -563,6 +563,9 @@ fi ||:
 %endif
 
 %changelog
+* Fri Jun 30 2023 Vitaly Zaitsev <vitaly@easycoding.org> - 3:470.199.02-1
+- Updated to version 470.199.02.
+
 * Fri Mar 31 2023 Vitaly Zaitsev <vitaly@easycoding.org> - 3:470.182.03-1
 - Updated to version 470.182.03.
 
