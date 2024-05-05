@@ -1,0 +1,11 @@
+--- a/kernel/Kbuild
++++ b/kernel/Kbuild
+@@ -53,6 +53,8 @@
+ NV_UNDEF_BEHAVIOR_SANITIZER ?=
+ ifeq ($(NV_UNDEF_BEHAVIOR_SANITIZER),1)
+  UBSAN_SANITIZE := y
++else
++ UBSAN_SANITIZE := n
+ endif
+ 
+ $(foreach _module, $(NV_KERNEL_MODULES), \

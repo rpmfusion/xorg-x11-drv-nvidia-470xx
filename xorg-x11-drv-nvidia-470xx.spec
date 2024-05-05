@@ -25,7 +25,7 @@
 Name:            xorg-x11-drv-%{_nvidia_serie}
 Epoch:           3
 Version:         470.239.06
-Release:         1%{?dist}
+Release:         2%{?dist}
 Summary:         NVIDIA's 470xx series proprietary display driver for NVIDIA graphic cards
 
 License:         Redistributable, no modification permitted
@@ -44,6 +44,8 @@ Source14:        nvidia-fallback.service
 Source15:        rhel_nvidia.conf
 Source16:        nvidia-power-management.conf
 Source17:        70-nvidia.preset
+
+Patch0:          nvidia-UBSAN.patch
 
 ExclusiveArch: x86_64 i686
 
@@ -208,6 +210,8 @@ sh %{SOURCE0} \
   --extract-only --target nvidiapkg-%{_target_cpu}
 ln -s nvidiapkg-%{_target_cpu} nvidiapkg
 
+cd nvidiapkg
+%patch -P0 -p1
 
 %build
 # Nothing to build
@@ -563,6 +567,9 @@ fi ||:
 %endif
 
 %changelog
+* Sun May 05 2024 Giannis Kapetanakis <bilias@edu.physics.uoc.gr> - 3:470.239.06-2
+- Disable Undefined Behavior Sanitizer - UBSAN for NVIDIA modules
+
 * Mon Apr 15 2024 Sérgio Basto <sergio@serjux.com> - 3:470.239.06-1
 - Update xorg-x11-drv-nvidia-470xx to 470.239.06
 
