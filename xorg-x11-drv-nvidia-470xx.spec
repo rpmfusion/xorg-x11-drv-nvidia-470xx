@@ -9,7 +9,7 @@
 %global        _firmwarepath        %{_prefix}/lib/firmware
 %global        _winedir             %{_libdir}/nvidia/wine
 %if 0%{?fedora} || 0%{?rhel} > 7
-%global        _dracutopts          rd.driver.blacklist=nouveau modprobe.blacklist=nouveau nvidia-drm.modeset=1
+%global        _dracutopts          rd.driver.blacklist=nouveau,nova_core modprobe.blacklist=nouveau,nova_core nvidia-drm.modeset=1
 %else
 %global        _dracutopts          nouveau.modeset=0 rd.driver.blacklist=nouveau nvidia-drm.modeset=1
 %global        _modprobedir         %{_prefix}/lib/modprobe.d
@@ -25,7 +25,7 @@
 Name:            xorg-x11-drv-%{_nvidia_serie}
 Epoch:           3
 Version:         470.256.02
-Release:         1%{?dist}
+Release:         2%{?dist}
 Summary:         NVIDIA's 470xx series proprietary display driver for NVIDIA graphic cards
 
 License:         Redistributable, no modification permitted
@@ -406,6 +406,9 @@ if [ "$1" -eq "1" ]; then
   fi
 fi || :
 
+%triggerun -- xorg-x11-drv-nvidia < 3:470.256.02-2
+%{_grubby} --args='%{_dracutopts}' &>/dev/null || :
+
 %preun
 if [ "$1" -eq "0" ]; then
   %{_grubby} --remove-args='%{_dracutopts}' &>/dev/null
@@ -563,6 +566,9 @@ fi ||:
 %endif
 
 %changelog
+* Wed Jul 09 2025 Leigh Scott <leigh123linux@gmail.com> - 3:470.256.02-2
+- Blacklist nova-core driver
+
 * Thu Jun 06 2024 Sérgio Basto <sergio@serjux.com> - 3:470.256.02-1
 - Update xorg-x11-drv-nvidia-470xx to 470.256.02
 
