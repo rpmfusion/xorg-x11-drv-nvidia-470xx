@@ -25,7 +25,7 @@
 Name:            xorg-x11-drv-%{_nvidia_serie}
 Epoch:           3
 Version:         470.256.02
-Release:         2%{?dist}
+Release:         3%{?dist}
 Summary:         NVIDIA's 470xx series proprietary display driver for NVIDIA graphic cards
 
 License:         Redistributable, no modification permitted
@@ -571,6 +571,9 @@ fi ||:
 %endif
 
 %changelog
+* Mon Aug 25 2025 Nicolas Chauvet <kwizart@gmail.com> - 3:470.256.02-3
+-  Do not depend on a given opencl implementation - rhbz#2375547
+
 * Wed Jul 09 2025 Leigh Scott <leigh123linux@gmail.com> - 3:470.256.02-2
 - Blacklist nova-core driver
 
