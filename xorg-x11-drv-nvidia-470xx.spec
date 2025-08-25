@@ -133,7 +133,6 @@ Requires:        (%{name}-cuda-libs(x86-32) = %{?epoch}:%{version}-%{release} if
 %else
 Requires:        nvidia-modprobe%{?_isa} >= %{?epoch}:%{version}
 %endif
-Requires:        ocl-icd%{?_isa}
 Requires:        opencl-filesystem
 
 Conflicts:       xorg-x11-drv-nvidia-340xx-cuda
@@ -155,6 +154,12 @@ This package provides the CUDA driver.
 
 %package cuda-libs
 Summary:         CUDA libraries for %{name}
+# Don't depend on any ICD-LOADER implementation - rhbz#2375547#c2
+%if 0%{?__isa_bits} == 64
+Requires:        libOpenCL.so.1()(64bit)
+%else
+Requires:        libOpenCL.so.1
+%endif
 
 %description cuda-libs
 This package provides the CUDA driver libraries.
