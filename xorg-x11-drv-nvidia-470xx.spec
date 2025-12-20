@@ -405,19 +405,17 @@ fi
 %post
 if [ "$1" -eq "1" ]; then
   %{_grubby} --remove-args='nomodeset' --args='%{_dracutopts}' &>/dev/null
-  sed -i -e 's/GRUB_CMDLINE_LINUX="/GRUB_CMDLINE_LINUX="%{_dracutopts} /g' %{_sysconfdir}/default/grub
   if [ -f %{_sysconfdir}/gdm/custom.conf ]; then
     sed -i -e 's/#WaylandEnable=.*/WaylandEnable=false/' %{_sysconfdir}/gdm/custom.conf
   fi
 fi || :
 
-%triggerun -- xorg-x11-drv-nvidia < 3:470.256.02-2
+%triggerun -- xorg-x11-drv-%{_nvidia_serie} < 3:470.256.02-2
 %{_grubby} --args='%{_dracutopts}' &>/dev/null || :
 
 %preun
 if [ "$1" -eq "0" ]; then
   %{_grubby} --remove-args='%{_dracutopts}' &>/dev/null
-  sed -i -e 's/%{_dracutopts} //g' %{_sysconfdir}/default/grub
   if [ -f %{_sysconfdir}/gdm/custom.conf ]; then
     sed -i -e 's/WaylandEnable=.*/#WaylandEnable=false/' %{_sysconfdir}/gdm/custom.conf
   fi
@@ -487,8 +485,7 @@ fi ||:
 %{_libdir}/libnvoptix.so.%{version}
 %{_libdir}/libnvidia-vulkan-producer.so.%{version}
 %{_libdir}/libnvidia-vulkan-producer.so
-# Fix f38 screw up
-%exclude %{_libdir}/libnvidia-vulkan-producer.so.470
+%exclude %{_libdir}/libnvidia-vulkan-producer.so.%{version}
 %{_winedir}/
 %endif
 %{_libdir}/libnvidia-eglcore.so.%{version}
