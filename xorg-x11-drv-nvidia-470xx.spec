@@ -25,7 +25,7 @@
 Name:            xorg-x11-drv-%{_nvidia_serie}
 Epoch:           3
 Version:         470.256.02
-Release:         4%{?dist}
+Release:         5%{?dist}
 Summary:         NVIDIA's 470xx series proprietary display driver for NVIDIA graphic cards
 
 License:         Redistributable, no modification permitted
@@ -410,7 +410,7 @@ if [ "$1" -eq "1" ]; then
   fi
 fi || :
 
-%triggerun -- xorg-x11-drv-%{_nvidia_serie} < 3:470.256.02-2
+%triggerun -- xorg-x11-drv-%{_nvidia_serie} < 3:470.256.02-5
 %{_grubby} --args='%{_dracutopts}' &>/dev/null || :
 
 %preun
@@ -568,6 +568,9 @@ fi ||:
 %endif
 
 %changelog
+* Sun Dec 21 2025 Sérgio Basto <sergio@serjux.com> - 3:470.256.02-5
+- Uodate the package version in the trigger condition, otherwise it will not run
+
 * Sat Dec 20 2025 Sérgio Basto <sergio@serjux.com> - 3:470.256.02-4
 - (#7331) Remove the /etc/default/grub workaround and handle NVIDIA package correctly
   https://github.com/rpmfusion/xorg-x11-drv-nvidia/commit/bb1a8cf1f801d1a7df8b37e9ff609d809e787b42
