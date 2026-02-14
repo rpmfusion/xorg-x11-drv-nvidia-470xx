@@ -97,7 +97,7 @@ for hardware accelerated rendering with the following NVIDIA chipsets:
 - GeForce 3000(M) series
 
 For the full product support list, please consult the release notes
-https://download.nvidia.com/XFree86/Linux-x86/%{version}/README/index.html
+https://download.nvidia.com/XFree86/Linux-x86_64/%{version}/README/index.html
 
 Please use the following documentation:
 https://rpmfusion.org/Howto/NVIDIA
