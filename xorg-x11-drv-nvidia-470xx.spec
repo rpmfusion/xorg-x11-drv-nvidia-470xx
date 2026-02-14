@@ -402,7 +402,7 @@ if [ "$1" -eq "1" ]; then
   fi
 fi
 
-%post
+%posttrans
 if [ "$1" -eq "1" ]; then
   %{_grubby} --remove-args='nomodeset' --args='%{_dracutopts}' &>/dev/null
   if [ -f %{_sysconfdir}/gdm/custom.conf ]; then
@@ -417,9 +417,6 @@ if [ "$1" -eq "1" ]; then
   fi
 %endif
 fi || :
-
-%triggerun -- xorg-x11-drv-%{_nvidia_serie} < 3:470.256.02-5
-%{_grubby} --args='%{_dracutopts}' &>/dev/null || :
 
 %preun
 if [ "$1" -eq "0" ]; then
