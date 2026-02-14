@@ -408,6 +408,14 @@ if [ "$1" -eq "1" ]; then
   if [ -f %{_sysconfdir}/gdm/custom.conf ]; then
     sed -i -e 's/#WaylandEnable=.*/WaylandEnable=false/' %{_sysconfdir}/gdm/custom.conf
   fi
+# EL8 still requires a grub2-mkconfig call
+%if 0%{?rhel} && 0%{?rhel} <= 8
+  if [ -f /boot/efi/EFI/fedora/grub.cfg ]; then
+     /sbin/grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
+  elif [ -f /boot/grub2/grub.cfg ]; then
+     /sbin/grub2-mkconfig -o /boot/grub2/grub.cfg
+  fi
+%endif
 fi || :
 
 %triggerun -- xorg-x11-drv-%{_nvidia_serie} < 3:470.256.02-5
@@ -421,6 +429,14 @@ if [ "$1" -eq "0" ]; then
   fi
   # Backup and disable previously used xorg.conf
   [ -f %{_sysconfdir}/X11/xorg.conf ] && mv %{_sysconfdir}/X11/xorg.conf %{_sysconfdir}/X11/xorg.conf.nvidia_uninstalled &>/dev/null
+  # EL8 still requires a grub2-mkconfig call
+%if 0%{?rhel} && 0%{?rhel} <= 8
+  if [ -f /boot/efi/EFI/fedora/grub.cfg ]; then
+     /sbin/grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
+  elif [ -f /boot/grub2/grub.cfg ]; then
+     /sbin/grub2-mkconfig -o /boot/grub2/grub.cfg
+  fi
+%endif
 fi ||:
 
 
